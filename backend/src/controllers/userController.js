@@ -8,21 +8,19 @@ const generateToken = (id) => {
   });
 };
 
+// Register new user
 const registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
+
     if (!name || !email || !password) {
-      res.status(400).json({ message: "Please fill in all fields" });
-      throw new Error("Please fill in all fields");
+      return res.status(400).json({ message: "Please fill in all fields" });
     }
-    // console.log("Registering user:", { name, email, password });
 
     const userExist = await User.findOne({ email });
     if (userExist) {
-      res.status(400).json({ message: "User already exists" });
-      throw new Error("User already exists");
+      return res.status(400).json({ message: "User already exists" });
     }
-    console.log("Creating user:", { name, email });
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
@@ -34,13 +32,14 @@ const registerUser = async (req, res) => {
     });
 
     const token = generateToken(user._id);
-    res.json({ name: user.name, email: user.email, token });
+    res.status(201).json({ name: user.name, email: user.email, token });
   } catch (error) {
+    console.error("Error in registerUser:", error);
     res.status(500).json({ message: "Server error" });
-    throw new Error("Server error");
   }
 };
 
+// Login user
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
@@ -55,9 +54,10 @@ const loginUser = async (req, res) => {
       return res.status(401).json({ message: "Invalid email or password" });
     }
 
-    const token = generateToken(user._id);
+    const token = generateToken(user._id)
     res.json({ name: user.name, email: user.email, token });
   } catch (error) {
+    console.error("Error in loginUser:", error);
     res.status(500).json({ message: "Server error" });
   }
 };

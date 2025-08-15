@@ -1,5 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import topicRoutes from './routes/topicRoutes.js';
 import ConnectDb from './config/db.js'
 
 dotenv.config()
@@ -19,5 +20,6 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/users', userRoutes)
+app.use('/api/topics', topicRoutes)
 
 app.listen(PORT, () => console.log(`Server is running ${PORT}`))
