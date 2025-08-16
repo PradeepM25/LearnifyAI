@@ -4,9 +4,10 @@ import { generateLessonPlan } from "../services/generateNotes.js";
 const getNotes = async (req, res) => {
   try {
     console.log(req.user);
-    const allTopics = await Topic.find({ createdBy: req.user._id });
+    const allTopics = await Topic.find({ createdBy: req.user.id });
     res.status(200).json({ topics: allTopics, message: "topics received" });
-  } catch (error) {
+  } 
+  catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
     console.error("Error in getNotes:", error);
   }
