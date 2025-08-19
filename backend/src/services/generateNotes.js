@@ -102,4 +102,6 @@ const generateLessonPlan = async (topic) => {
     return response.text();
 }
 
+
+
 export { generateLessonPlan };
