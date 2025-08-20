@@ -1,10 +1,10 @@
-import Topic from "../models/topic.js";
+import QuickNote from "../models/quickNotes.js";
 import { generateLessonPlan } from "../services/generateNotes.js";
 
-const getNotes = async (req, res) => {
+const getQuickNotes = async (req, res) => {
   try {
     console.log(req.user);
-    const allTopics = await Topic.find({ createdBy: req.user.id });
+    const allTopics = await QuickNote.find({ createdBy: req.user.id });
     res.status(200).json({ topics: allTopics, message: "topics received" });
   } 
   catch (error) {
@@ -13,7 +13,7 @@ const getNotes = async (req, res) => {
   }
 };
 
-const topicNotes = async (req, res) => {
+const generateQuickNotes = async (req, res) => {
   try {
     const { topic } = req.body;
 
@@ -21,14 +21,14 @@ const topicNotes = async (req, res) => {
       return res.status(400).json({ message: "Topic is required" });
     }
 
-    const topicExist = await Topic.findOne({ name: topic });
+    const topicExist = await QuickNote.findOne({ Title: topic });
     if (topicExist) {
-      return res.status(409).json({ message: "Topic already exists" });
+      return res.status(402).json({ message: "Topic already exists" });
     }
     
     const lessonPlan = await generateLessonPlan(topic);
 
-    await Topic.create({
+    await QuickNote.create({
       Title: topic,
       htmlContent: lessonPlan,
       createdBy: req.user.id
@@ -41,4 +41,4 @@ const topicNotes = async (req, res) => {
   }
 };
 
-export { getNotes, topicNotes };
+export { getQuickNotes, generateQuickNotes };
