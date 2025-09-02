@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
+import QuickNotes from "../components/QuickNotes";
 
 const Dashboard = () => {
   const { user } = useSelector((state) => state.auth);
@@ -29,25 +30,7 @@ const Dashboard = () => {
       <div className="space-y-12 max-w-5xl mx-auto">
         {/* Quick Notes */}
         <section>
-          <h2 className="text-2xl font-semibold mb-5">📝 Quick Notes History</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            {[
-              { title: "React Basics", date: "20 Aug 2025" },
-              { title: "JWT Authentication", date: "21 Aug 2025" },
-            ].map((note, i) => (
-              <motion.div
-                key={i}
-                className="bg-white/10 backdrop-blur-lg p-6 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1"
-                whileHover={{ scale: 1.03 }}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.2 }}
-              >
-                <h3 className="font-bold text-lg text-blue-400">{note.title}</h3>
-                <p className="text-gray-400 text-sm">Generated on: {note.date}</p>
-              </motion.div>
-            ))}
-          </div>
+          <QuickNotes />
         </section>
 
         {/* Modules */}

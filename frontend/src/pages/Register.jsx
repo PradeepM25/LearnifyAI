@@ -18,9 +18,9 @@ const Register = () => {
     e.preventDefault();
     try {
       console.log("Registering user:", form);
-      await register(form).unwrap();
-      dispatch(setCredentials(form));
-      navigate("/dashboard");
+  const userData = await register(form).unwrap();
+  dispatch(setCredentials(userData)); // userData includes token
+  navigate("/dashboard");
     } catch (err) {
       console.error("Register failed:", err);
     }

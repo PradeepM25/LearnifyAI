@@ -17,10 +17,10 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const userData = await login(form).unwrap();
-      dispatch(setCredentials(userData));
-      console.log("Login successful:", userData);
-      navigate("/dashboard");
+  const userData = await login(form).unwrap();
+  dispatch(setCredentials(userData)); // userData includes token
+  console.log("Login successful:", userData);
+  navigate("/dashboard");
     } catch (err) {
       console.error("Login failed:", err);
     }
