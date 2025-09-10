@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import QuickNotes from "../components/QuickNotes";
+import Modules from "../components/Modules";
 
 const Dashboard = () => {
   const { user } = useSelector((state) => state.auth);
@@ -35,27 +36,7 @@ const Dashboard = () => {
 
         {/* Modules */}
         <section>
-          <h2 className="text-2xl font-semibold mb-5">📚 Modules History</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            {[
-              { title: "Machine Learning", level: "Intermediate" },
-              { title: "Databases", level: "Beginner" },
-            ].map((module, i) => (
-              <motion.div
-                key={i}
-                className="bg-white/10 backdrop-blur-lg p-6 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1"
-                whileHover={{ scale: 1.03 }}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.2 }}
-              >
-                <h3 className="font-bold text-lg text-purple-400">{module.title}</h3>
-                <p className="text-gray-400 text-sm">
-                  Difficulty: {module.level}
-                </p>
-              </motion.div>
-            ))}
-          </div>
+          <Modules />
         </section>
       </div>
     </div>
