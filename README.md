@@ -107,10 +107,3 @@ learnifyai/
 - `POST /api/modules/generate` - Generate a new module
 - `GET /api/modules/getAll` - Get all modules for the user
 
-## Contributing
-
-Feel free to fork the repository, open issues, or submit pull requests for improvements and new features.
-
-## License
-
-This project is licensed under the MIT License.
