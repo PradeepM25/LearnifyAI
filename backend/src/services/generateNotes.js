@@ -1,4 +1,6 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const lessonPrompt = `Act as an experienced instructional designer, curriculum architect, and subject matter expert. I will provide a topic or concept, and your task is to generate a comprehensive, structured lesson plan designed for digital delivery. The lesson must follow this detailed structure and be rich in content, educational theory, and learner engagement strategies:
