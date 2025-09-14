@@ -4,7 +4,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const quickNotesApi = createApi({
   reducerPath: "quickNotesApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:4000/api/topics",
+    baseUrl: `${import.meta.env.VITE_BACKEND_URL}/api/topics`,
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.user?.token;
       if (token) {

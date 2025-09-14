@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const modulesApi = createApi({
   reducerPath: "modulesApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:4000/api/modules",
+    baseUrl: `${import.meta.env.VITE_BACKEND_URL}/api/modules`, 
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.user?.token;
       if (token) {
