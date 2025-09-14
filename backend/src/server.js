@@ -14,7 +14,7 @@ const app = express()
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true })); 
 app.use(cors({
-    origin: true,
+    origin: [process.env.LOCALHOST_FRONTEND_URL, process.env.PRODUCTION_FRONTEND_URL],
     credentials: true,
 }));
 // console.log(process.env.PORT);
